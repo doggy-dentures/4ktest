@@ -29,10 +29,12 @@ class CustomTransition{
 		FlxG.cameras.add(transitionCamera, false);
         
         transitionData.state = state;
+        transitionData.transitionCamera = transitionCamera;
         transitionData.cameras = [transitionCamera];
-        transitionData.play();
-
         FlxG.state.add(transitionData);
+        transitionCamera.flashSprite.parent.removeChild(transitionCamera.flashSprite);
+        FlxG.game.addChild(transitionCamera.flashSprite);
+        transitionData.play();
 
         return;
 

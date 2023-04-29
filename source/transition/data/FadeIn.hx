@@ -1,5 +1,6 @@
 package transition.data;
 
+import flixel.util.FlxDestroyUtil;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -20,7 +21,10 @@ class FadeIn extends BasicTransition{
 
         time = _time;
 
-        blockThing = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, _color);
+        blockThing = new FlxSprite().makeGraphic(1, 1, _color);
+        blockThing.setGraphicSize(FlxG.width, FlxG.height);
+        blockThing.updateHitbox();
+        blockThing.graphic.bitmap.disposeImage();
         blockThing.alpha = 1;
         add(blockThing);
 
@@ -29,7 +33,14 @@ class FadeIn extends BasicTransition{
     override public function play(){
         FlxTween.tween(blockThing, {alpha: 0}, time, {ease: FlxEase.quartOut, onComplete: function(tween){
             end();
+            FlxDestroyUtil.destroy(tween);
         }});
+    }
+
+    override public function destroy()
+    {
+        blockThing = FlxDestroyUtil.destroy(blockThing);
+        super.destroy();
     }
 
 }

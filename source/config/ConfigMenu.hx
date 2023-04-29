@@ -151,10 +151,10 @@ class ConfigMenu extends MusicBeatState
 		scheme = Config.controllerScheme;
 		dimValue = Config.bgDim;
 		
-		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets');
+		var tex = Paths.getSparrowAtlas('justoptions');
 		var optionTitle:FlxSprite = new FlxSprite(0, 55);
 		optionTitle.frames = tex;
-		optionTitle.animation.addByPrefix('selected', "options white", 24);
+		optionTitle.animation.addByPrefix('selected', "options selected", 24);
 		optionTitle.animation.play('selected');
 		optionTitle.scrollFactor.set();
 		optionTitle.antialiasing = true;
@@ -164,26 +164,31 @@ class ConfigMenu extends MusicBeatState
 		add(optionTitle);
 			
 		
-		configText = new FlxText(0, 215, 1280, "", 42);
+		configText = new FlxText(0, optionTitle.y + optionTitle.height + 50, 1280 * 3, "", 42 * 3);
 		configText.scrollFactor.set(0, 0);
-		configText.setFormat(Paths.font("Funkin-Bold", "otf"), 42, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		configText.borderSize = 3;
+		configText.setFormat(Paths.font("Funkin-Bold", "otf"), 42 * 3, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		configText.borderSize = 8;
 		configText.borderQuality = 1;
+		configText.antialiasing = true;
 		
-		descText = new FlxText(320, 638, 640, "", 20);
+		descText = new FlxText(320 * 3, 1800, 640 * 3, "", 20 * 3);
 		descText.scrollFactor.set(0, 0);
-		descText.setFormat(Paths.font("vcr"), 20, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		descText.setFormat(Paths.font("vcr"), 20 * 3, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		//descText.borderSize = 3;
 		descText.borderQuality = 1;
 
-		tabDisplay = new FlxText(5, FlxG.height - 53, 0, Std.string(tabKeys), 16);
+		tabDisplay = new FlxText(5 * 3, FlxG.height - 53 * 3, 0, Std.string(tabKeys), 16 * 3);
 		tabDisplay.scrollFactor.set();
 		tabDisplay.visible = false;
 		tabDisplay.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		tabDisplay.scale.set(2,2);
+		tabDisplay.updateHitbox();
 
-		var backText = new FlxText(5, FlxG.height - 37, 0, "ESCAPE - Back to Menu\nBACKSPACE - Reset to Defaults\n", 16);
+		var backText = new FlxText(5 * 3, FlxG.height - 37 * 3, 0, "ESCAPE - Back to Menu\nBACKSPACE - Reset to Defaults\n", 16);
 		backText.scrollFactor.set();
 		backText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		backText.scale.set(2,2);
+		backText.updateHitbox();
 
 		add(configText);
 		add(descText);
@@ -451,11 +456,11 @@ class ConfigMenu extends MusicBeatState
 					case 10: //Preload settings
 						if (controls.ACCEPT) {
 							#if desktop
-							FlxG.sound.play(Paths.sound('scrollMenu'));
-							canChangeItems = false;
-							writeToConfig();
-							switchState(new CacheSettings());
-							CacheSettings.returnLoc = new ConfigMenu();
+							// FlxG.sound.play(Paths.sound('scrollMenu'));
+							// canChangeItems = false;
+							// writeToConfig();
+							// switchState(new CacheSettings());
+							// CacheSettings.returnLoc = new ConfigMenu();
 							#end
 						}
 					

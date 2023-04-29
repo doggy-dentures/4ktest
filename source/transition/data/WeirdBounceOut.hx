@@ -20,7 +20,10 @@ class WeirdBounceOut extends BasicTransition{
 
         time = _time;
 
-        blockThing = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        blockThing = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
+        blockThing.setGraphicSize(FlxG.width, FlxG.height);
+        blockThing.updateHitbox();
+        blockThing.graphic.bitmap.disposeImage();
         blockThing.x -= blockThing.width;
         add(blockThing);
 
@@ -29,7 +32,14 @@ class WeirdBounceOut extends BasicTransition{
     override public function play(){
         FlxTween.tween(blockThing, {x: 0}, time, {ease: FlxEase.quartOut, onComplete: function(tween){
             end();
+            flixel.util.FlxDestroyUtil.destroy(tween);
         }});
+    }
+
+    override public function destroy()
+    {
+        blockThing = flixel.util.FlxDestroyUtil.destroy(blockThing);
+        super.destroy();
     }
 
 }

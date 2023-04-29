@@ -24,7 +24,10 @@ class StrangeExpandOut extends BasicTransition{
         wait = _wait;
         time2 = _time2;
 
-        blockThing = new FlxSprite().makeGraphic(FlxG.width, Std.int(FlxG.height/4), FlxColor.BLACK);
+        blockThing = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
+        blockThing.setGraphicSize(FlxG.width, Std.int(FlxG.height/4));
+        blockThing.updateHitbox();
+        blockThing.graphic.bitmap.disposeImage();
         blockThing.x -= blockThing.width;
         blockThing.screenCenter(Y);
         add(blockThing);
@@ -35,8 +38,14 @@ class StrangeExpandOut extends BasicTransition{
         FlxTween.tween(blockThing, {x: 0}, time, {ease: FlxEase.quartOut, onComplete: function(tween){
             FlxTween.tween(blockThing.scale, {y: 4}, time2, {ease: FlxEase.quartOut, startDelay: wait, onComplete: function(tween){
                 end();
+                flixel.util.FlxDestroyUtil.destroy(tween);
             }});
         }});
+    }
+    override public function destroy()
+    {
+        blockThing = flixel.util.FlxDestroyUtil.destroy(blockThing);
+        super.destroy();
     }
 
 }

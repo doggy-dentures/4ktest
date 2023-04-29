@@ -29,7 +29,7 @@ class FreeplayState extends MusicBeatState
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
-	private var iconArray:Array<HealthIcon> = [];
+	// private var iconArray:Array<HealthIcon> = [];
 
 	override function create()
 	{
@@ -45,25 +45,26 @@ class FreeplayState extends MusicBeatState
 		if (StoryMenuState.weekUnlocked[2] || isDebug)
 			addWeek(['Bopeebo', 'Fresh', 'Dadbattle'], 1, ['dad']);
 
-		if (StoryMenuState.weekUnlocked[2] || isDebug)
-			addWeek(['Spookeez', 'South', 'Monster'], 2, ['spooky', 'spooky', "monster"]);
+		// if (StoryMenuState.weekUnlocked[2] || isDebug)
+		// 	addWeek(['Spookeez', 'South', 'Monster'], 2, ['spooky', 'spooky', "monster"]);
 
-		if (StoryMenuState.weekUnlocked[3] || isDebug)
-			addWeek(['Pico', 'Philly', 'Blammed'], 3, ['pico']);
+		// if (StoryMenuState.weekUnlocked[3] || isDebug)
+		// 	addWeek(['Pico', 'Philly', 'Blammed'], 3, ['pico']);
 
-		if (StoryMenuState.weekUnlocked[4] || isDebug)
-			addWeek(['Satin-Panties', 'High', 'Milf'], 4, ['mom']);
+		// if (StoryMenuState.weekUnlocked[4] || isDebug)
+		// 	addWeek(['Satin-Panties', 'High', 'Milf'], 4, ['mom']);
 
-		if (StoryMenuState.weekUnlocked[5] || isDebug)
-			addWeek(['Cocoa', 'Eggnog', 'Winter-Horrorland'], 5, ['parents-christmas', 'parents-christmas', 'monster-christmas']);
+		// if (StoryMenuState.weekUnlocked[5] || isDebug)
+		// 	addWeek(['Cocoa', 'Eggnog', 'Winter-Horrorland'], 5, ['parents-christmas', 'parents-christmas', 'monster-christmas']);
 
-		if (StoryMenuState.weekUnlocked[6] || isDebug)
-			addWeek(['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai-angry', 'spirit']);
+		// if (StoryMenuState.weekUnlocked[6] || isDebug)
+		// 	addWeek(['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai-angry', 'spirit']);
 
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg.color = 0xff9271fd;
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
@@ -71,17 +72,17 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
+			var songText:Alphabet = new Alphabet(0, (70 * i * 3) + 90, songs[i].songName, true, false);
 			songText.isMenuItem = true;
 			songText.targetY = i;
 			grpSongs.add(songText);
 
-			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter, i);
-			icon.sprTracker = songText;
+			// var icon:HealthIcon = new HealthIcon(songs[i].songCharacter, i);
+			// // icon.sprTracker = songText;
 
-			// using a FlxGroup is too much fuss!
-			iconArray.push(icon);
-			add(icon);
+			// // using a FlxGroup is too much fuss!
+			// iconArray.push(icon);
+			// add(icon);
 
 			// songText.x += 40;
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
@@ -92,13 +93,18 @@ class FreeplayState extends MusicBeatState
 		// scoreText.autoSize = false;
 		scoreText.setFormat(Paths.font("vcr"), 32, FlxColor.WHITE, RIGHT);
 		// scoreText.alignment = RIGHT;
+		scoreText.scale.set(3,3);
+		scoreText.updateHitbox();
 
-		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 66, 0xFF000000);
+		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6 * 3, 0).makeGraphic(1,1, 0xFF000000);
+		scoreBG.setGraphicSize(Std.int(FlxG.width * 0.35), 66 * 3);
+		scoreBG.updateHitbox();
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
 
-		diffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "", 24);
+		diffText = new FlxText(scoreText.x, scoreText.y + 36 * 3, 0, "", 24);
 		diffText.font = scoreText.font;
+		diffText.scale.set(3,3);
 		add(diffText);
 
 		add(scoreText);
@@ -114,7 +120,7 @@ class FreeplayState extends MusicBeatState
 		selector.text = ">";
 		// add(selector);
 
-		var swag:Alphabet = new Alphabet(1, 0, "swag");
+		// var swag:Alphabet = new Alphabet(1, 0, "swag");
 
 		// JUST DOIN THIS SHIT FOR TESTING!!!
 		/* 
@@ -162,6 +168,7 @@ class FreeplayState extends MusicBeatState
 			lerpScore = intendedScore;
 
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
+		scoreText.updateHitbox();
 
 		var upP = controls.UP_P;
 		var downP = controls.DOWN_P;
@@ -227,6 +234,7 @@ class FreeplayState extends MusicBeatState
 			case 2:
 				diffText.text = "HARD";
 		}
+		diffText.updateHitbox();
 	}
 
 	function changeSelection(change:Int = 0)
@@ -252,14 +260,14 @@ class FreeplayState extends MusicBeatState
 
 		var bullShit:Int = 0;
 
-		for (i in 0...iconArray.length)
-		{
-			iconArray[i].alpha = 0.6;
-			iconArray[i].animation.curAnim.curFrame = 0;
-		}
+		// for (i in 0...iconArray.length)
+		// {
+		// 	iconArray[i].alpha = 0.6;
+		// 	iconArray[i].normal();
+		// }
 
-		iconArray[curSelected].alpha = 1;
-		iconArray[curSelected].animation.curAnim.curFrame = 2;
+		// iconArray[curSelected].alpha = 1;
+		// iconArray[curSelected].win();
 
 		for (item in grpSongs.members)
 		{

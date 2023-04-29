@@ -1,17 +1,20 @@
 package;
 
+import sys.FileSystem;
+import flixel.util.FlxDestroyUtil;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.FlxSprite;
 
 class HealthIcon extends FlxSprite
 {
-	public var sprTracker:FlxSprite;
-	public var id:Int;
+	public var defualtIconScale:Float = 1.0;
+	public var iconScale:Float = 1.0;
+	public var iconSize:Float = 450;
 
-	public var defualtIconScale:Float = 1;
-	public var iconScale:Float = 1;
-	public var iconSize:Float;
+	var char:String;
+
+	public var status:String = "normal";
 
 	private var tween:FlxTween;
 
@@ -20,59 +23,57 @@ class HealthIcon extends FlxSprite
 	public function new(char:String = 'face', isPlayer:Bool = false, ?_id:Int = -1)
 	{
 		super();
-		loadGraphic(Paths.image('iconGrid'), true, 150, 150);
-			
-		animation.add('bf', [0, 1, 30], 0, false, isPlayer);
-		animation.add('bf-car', [0, 1, 30], 0, false, isPlayer);
-		animation.add('bf-christmas', [0, 1, 30], 0, false, isPlayer);
-		animation.add('bf-pixel', [21, 41, 40], 0, false, isPlayer);
-		animation.add('spooky', [2, 3, 31], 0, false, isPlayer);
-		animation.add('pico', [4, 5, 32], 0, false, isPlayer);
-		animation.add('mom', [6, 7, 33], 0, false, isPlayer);
-		animation.add('mom-car', [6, 7, 33], 0, false, isPlayer);
-		animation.add('tankman', [8, 9, 50], 0, false, isPlayer);
-		animation.add('face', [10, 11, 38], 0, false, isPlayer);
-		animation.add('dad', [12, 13, 34], 0, false, isPlayer);
-		animation.add('senpai', [22, 42, 43], 0, false, isPlayer);
-		animation.add('senpai-angry', [44, 45, 46], 0, false, isPlayer);
-		animation.add('spirit', [23, 47, 48], 0, false, isPlayer);
-		animation.add('bf-old', [14, 15, 39], 0, false, isPlayer);
-		animation.add('parents-christmas', [17, 18, 36], 0, false, isPlayer);
-		animation.add('monster', [19, 20, 37], 0, false, isPlayer);
-		animation.add('monster-christmas', [19, 20, 37], 0, false, isPlayer);
-		animation.add('gf', [16, 49, (_id != -1) ? 49 : 35], 0, false, isPlayer);
-		animation.add('gf-car', [16, 49, 35], 0, false, isPlayer);
-		animation.add('gf-pixel', [16, 49, 35], 0, false, isPlayer);
+		flipX = isPlayer;
 
-		iconSize = width;
+		changeChar(char);
 
-		id = _id;
-		
+		normal();
+
 		antialiasing = !pixelIcons.contains(char);
-		animation.play(char);
 		scrollFactor.set();
 
 		tween = FlxTween.tween(this, {}, 0);
 	}
 
+	public function changeChar(char:String)
+	{
+		this.char = char;
+	}
+
+	public function normal()
+	{
+		loadGraphic(Paths.image("healthicons/" + char + "/normal"));
+		status = "normal";
+	}
+
+	public function win()
+	{
+		loadGraphic(Paths.image("healthicons/" + char + "/win"));
+		status = "win";
+	}
+
+	public function lose()
+	{
+		loadGraphic(Paths.image("healthicons/" + char + "/lose"));
+		status = "lose";
+	}
+
 	override function update(elapsed:Float)
 	{
-
-
 		super.update(elapsed);
 		setGraphicSize(Std.int(iconSize * iconScale));
 		updateHitbox();
-
-		if (sprTracker != null){
-			setPosition(sprTracker.x + sprTracker.width + 10, sprTracker.y - 30);
-		}
 	}
 
-	public function tweenToDefaultScale(_time:Float, _ease:Null<flixel.tweens.EaseFunction>){
-
+	public function tweenToDefaultScale(_time:Float, _ease:Null<flixel.tweens.EaseFunction>)
+	{
 		tween.cancel();
 		tween = FlxTween.tween(this, {iconScale: this.defualtIconScale}, _time, {ease: _ease});
-
 	}
 
+	override public function destroy()
+	{
+		tween = FlxDestroyUtil.destroy(tween);
+		super.destroy();
+	}
 }

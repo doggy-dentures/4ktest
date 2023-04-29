@@ -22,7 +22,10 @@ class StrangeExpandIn extends BasicTransition{
 
         time = _time;
 
-        blockThing = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        blockThing = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
+        blockThing.setGraphicSize(FlxG.width, FlxG.height);
+        blockThing.updateHitbox();
+        blockThing.graphic.bitmap.disposeImage();
         add(blockThing);
 
     }
@@ -30,7 +33,14 @@ class StrangeExpandIn extends BasicTransition{
     override public function play(){
         FlxTween.tween(blockThing.scale, {x: 0, y: 0}, time, {ease: FlxEase.quartOut, startDelay: 0.2, onComplete: function(tween){
             end();
+            flixel.util.FlxDestroyUtil.destroy(tween);
         }});
+    }
+
+    override public function destroy()
+    {
+        blockThing = flixel.util.FlxDestroyUtil.destroy(blockThing);
+        super.destroy();
     }
 
 }

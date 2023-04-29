@@ -48,23 +48,24 @@ class KeyBindMenu extends MusicBeatState
 		bg.color = 0xFF9766BE;
 		add(bg);
 
-        keyTextDisplay = new FlxText(0, 0, 1280, "", 72);
+        keyTextDisplay = new FlxText(0, 0, 0, "", 72);
 		keyTextDisplay.scrollFactor.set(0, 0);
-		keyTextDisplay.setFormat(Paths.font("Funkin-Bold", "otf"), 72, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		keyTextDisplay.borderSize = 3;
+		keyTextDisplay.setFormat(Paths.font("Funkin-Bold", "otf"), 72 * 3, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		keyTextDisplay.borderSize = 8;
 		keyTextDisplay.borderQuality = 1;
+        keyTextDisplay.antialiasing = true;
         add(keyTextDisplay);
 
-        keyWarning = new FlxText(0, 580, 1280, "WARNING: BIND NOT SET, TRY ANOTHER KEY", 42);
+        keyWarning = new FlxText(0, 580 * 3, 0, "WARNING: BIND NOT SET, TRY ANOTHER KEY", 42);
 		keyWarning.scrollFactor.set(0, 0);
-		keyWarning.setFormat(Paths.font("vcr"), 42, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		keyWarning.setFormat(Paths.font("vcr"), 42 * 3, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         keyWarning.borderSize = 3;
 		keyWarning.borderQuality = 1;
         keyWarning.screenCenter(X);
         keyWarning.alpha = 0;
         add(keyWarning);
 
-        var backText = new FlxText(5, FlxG.height - 37, 0, "ESCAPE - Back to Menu\nBACKSPACE - Reset to Defaults\n", 16);
+        var backText = new FlxText(5, FlxG.height - 37 * 3, 0, "ESCAPE - Back to Menu\nBACKSPACE - Reset to Defaults\n", 16);
 		backText.scrollFactor.set();
 		backText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         add(backText);

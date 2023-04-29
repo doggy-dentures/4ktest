@@ -36,17 +36,18 @@ class MainMenuState extends MusicBeatState
 
 		openfl.Lib.current.stage.frameRate = 144;
 
-		if (!FlxG.sound.music.playing)
+		if (FlxG.sound.music == null || !FlxG.sound.music.playing)
 		{	
 			FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), 1);
 		}
 
 		persistentUpdate = persistentDraw = true;
 
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
+		bg.color = 0xfffde871;
 		bg.scrollFactor.x = 0;
-		bg.scrollFactor.y = 0.18;
-		bg.setGraphicSize(Std.int(bg.width * 1.18));
+		bg.scrollFactor.y = 0;
+		// bg.setGraphicSize(Std.int(bg.width * 1.18));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = true;
@@ -55,10 +56,11 @@ class MainMenuState extends MusicBeatState
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 	
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuBGMagenta'));
+		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
+		magenta.color = 0xfffd719b;
 		magenta.scrollFactor.x = 0;
-		magenta.scrollFactor.y = 0.18;
-		magenta.setGraphicSize(Std.int(magenta.width * 1.18));
+		magenta.scrollFactor.y = 0;
+		// magenta.setGraphicSize(Std.int(magenta.width * 1.18));
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
@@ -73,7 +75,7 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(0, 60 + (i * 160));
+			var menuItem:FlxSprite = new FlxSprite(0, 60 + (i * 160 * 3));
 			menuItem.frames = tex;
 			
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
@@ -110,6 +112,8 @@ class MainMenuState extends MusicBeatState
 		Config.reload();
 
 		super.create();
+
+		openfl.system.System.gc();
 	}
 
 	var selectedSomethin:Bool = false;
@@ -144,7 +148,7 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.BACK)
 			{
-				switchState(new TitleScreen());
+				// switchState(new TitleScreen());
 			}
 
 			if (controls.ACCEPT)

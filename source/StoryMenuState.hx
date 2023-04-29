@@ -50,29 +50,29 @@ class StoryMenuState extends MusicBeatState
 	{
 
 		openfl.Lib.current.stage.frameRate = 144;
-	
+
 		weekData = [
 			['Tutorial'],
-			['Bopeebo', 'Fresh', 'Dadbattle'],
-			['Spookeez', 'South', 'Monster'],
-			['Pico', 'Philly', "Blammed"],
-			['Satin-Panties', "High", "Milf"],
-			['Cocoa', 'Eggnog', 'Winter-Horrorland'],
-			['Senpai', 'Roses', 'Thorns']
+			['Bopeebo', 'Fresh', 'Dadbattle']
+			// ['Spookeez', 'South', 'Monster'],
+			// ['Pico', 'Philly', "Blammed"],
+			// ['Satin-Panties', "High", "Milf"],
+			// ['Cocoa', 'Eggnog', 'Winter-Horrorland'],
+			// ['Senpai', 'Roses', 'Thorns']
 		];
-		
+
 		weekCharacters = [
 			['dad', 'bf', 'gf'],
-			['dad', 'bf', 'gf'],
-			['spooky', 'bf', 'gf'],
-			['pico', 'bf', 'gf'],
-			['mom', 'bf', 'gf'],
-			['parents-christmas', 'bf', 'gf'],
-			['senpai', 'bf', 'gf']
+			['dad', 'bf', 'gf']
+			// ['spooky', 'bf', 'gf'],
+			// ['pico', 'bf', 'gf'],
+			// ['mom', 'bf', 'gf'],
+			// ['parents-christmas', 'bf', 'gf'],
+			// ['senpai', 'bf', 'gf']
 		];
-	
+
 		weekNames = CoolUtil.coolTextFile(Paths.text("weekNames"));
-	
+
 		if (FlxG.sound.music == null)
 		{
 			FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), 1);
@@ -94,12 +94,16 @@ class StoryMenuState extends MusicBeatState
 		rankText.screenCenter(X);
 
 		ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
-		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFFF9CF51);
+		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(1,1, 0xFFF9CF51);
+		yellowBG.setGraphicSize(FlxG.width, 400);
+		yellowBG.updateHitbox();
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
 		add(grpWeekText);
 
-		var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 56, FlxColor.BLACK);
+		var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(1,1, FlxColor.BLACK);
+		blackBarThingie.setGraphicSize(FlxG.width, 56);
+		blackBarThingie.updateHitbox();
 		add(blackBarThingie);
 
 		grpWeekCharacters = new FlxTypedGroup<MenuCharacter>();
@@ -112,7 +116,7 @@ class StoryMenuState extends MusicBeatState
 		for (i in 0...weekData.length)
 		{
 			var weekThing:MenuItem = new MenuItem(0, yellowBG.y + yellowBG.height + 10, i);
-			weekThing.y += ((weekThing.height + 20) * i);
+			weekThing.y += ((weekThing.height + 20) * i * 3);
 			weekThing.targetY = i;
 			grpWeekText.add(weekThing);
 
@@ -123,7 +127,7 @@ class StoryMenuState extends MusicBeatState
 			// Needs an offset thingie
 			if (!weekUnlocked[i])
 			{
-				var lock:FlxSprite = new FlxSprite(weekThing.width + 10 + weekThing.x);
+				var lock:FlxSprite = new FlxSprite((weekThing.width + 10 + weekThing.x) * 3);
 				lock.frames = ui_tex;
 				lock.animation.addByPrefix('lock', 'lock');
 				lock.animation.play('lock');
@@ -168,14 +172,14 @@ class StoryMenuState extends MusicBeatState
 
 		trace("Line 124");
 
-		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 10, grpWeekText.members[0].y + 10);
+		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 10 * 3, grpWeekText.members[0].y + 10 * 3);
 		leftArrow.frames = ui_tex;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
 		leftArrow.animation.play('idle');
 		difficultySelectors.add(leftArrow);
 
-		sprDifficulty = new FlxSprite(leftArrow.x + 130, leftArrow.y);
+		sprDifficulty = new FlxSprite(leftArrow.x + 130 * 3, leftArrow.y);
 		sprDifficulty.frames = ui_tex;
 		sprDifficulty.animation.addByPrefix('easy', 'EASY');
 		sprDifficulty.animation.addByPrefix('normal', 'NORMAL');
@@ -185,7 +189,7 @@ class StoryMenuState extends MusicBeatState
 
 		difficultySelectors.add(sprDifficulty);
 
-		rightArrow = new FlxSprite(sprDifficulty.x + sprDifficulty.width + 50, leftArrow.y);
+		rightArrow = new FlxSprite(sprDifficulty.x + sprDifficulty.width + 50 * 3, leftArrow.y);
 		rightArrow.frames = ui_tex;
 		rightArrow.animation.addByPrefix('idle', 'arrow right');
 		rightArrow.animation.addByPrefix('press', "arrow push right", 24, false);
@@ -340,13 +344,13 @@ class StoryMenuState extends MusicBeatState
 		{
 			case 0:
 				sprDifficulty.animation.play('easy');
-				sprDifficulty.offset.x = 20;
+				sprDifficulty.offset.x = 20 * 3;
 			case 1:
 				sprDifficulty.animation.play('normal');
-				sprDifficulty.offset.x = 70;
+				sprDifficulty.offset.x = 70 * 3;
 			case 2:
 				sprDifficulty.animation.play('hard');
-				sprDifficulty.offset.x = 20;
+				sprDifficulty.offset.x = 20 * 3;
 		}
 
 		sprDifficulty.alpha = 0;

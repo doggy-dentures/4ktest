@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+-->
+<TextureAtlas imagePath="justoptions.png" width="1024" height="512">
+  <SubTexture name="options selected 0000" x="2" y="331"  width="606" height="155" frameX="-2" frameY="-1" frameWidth="610" frameHeight="163"/>
+  <SubTexture name="options selected 0001" x="2" y="169"  width="607" height="158" frameX="-3" frameY="-1" frameWidth="610" frameHeight="163"/>
+  <SubTexture name="options selected 0002" x="2" y="2"  width="610" height="163" frameX="-0" frameY="-0" frameWidth="610" frameHeight="163"/>
+</TextureAtlas>

@@ -21,50 +21,51 @@ using StringTools;
 class Startup extends FlxState
 {
 
-    var nextState:FlxState = new TitleVideo();
+    // var nextState:FlxState = new TitleVideo();
+    var nextState:FlxState = new MainMenuState();
 
-    var splash:FlxSprite;
+    // var splash:FlxSprite;
     //var dummy:FlxSprite;
-    var loadingText:FlxText;
+    // var loadingText:FlxText;
 
-    var songsCached:Bool;
-    public static final songs:Array<String> =   ["Tutorial", 
-                                "Bopeebo", "Fresh", "Dadbattle", 
-                                "Spookeez", "South", "Monster",
-                                "Pico", "Philly", "Blammed", 
-                                "Satin-Panties", "High", "Milf", 
-                                "Cocoa", "Eggnog", "Winter-Horrorland", 
-                                "Senpai", "Roses", "Thorns",
-                                "klaskiiLoop", "freakyMenu"]; //Start of the non-gameplay songs.
+    // var songsCached:Bool;
+    // public static final songs:Array<String> =   ["Tutorial", 
+    //                             "Bopeebo", "Fresh", "Dadbattle", 
+    //                             "Spookeez", "South", "Monster",
+    //                             "Pico", "Philly", "Blammed", 
+    //                             "Satin-Panties", "High", "Milf", 
+    //                             "Cocoa", "Eggnog", "Winter-Horrorland", 
+    //                             "Senpai", "Roses", "Thorns",
+    //                             "klaskiiLoop", "freakyMenu"]; //Start of the non-gameplay songs.
                                 
-    //List of character graphics and some other stuff.
-    //Just in case it want to do something with it later.
-    var charactersCached:Bool;
-    var startCachingCharacters:Bool = false;
-    var charI:Int = 0;
-    public static final characters:Array<String> =   ["BOYFRIEND", "bfCar", "christmas/bfChristmas", "weeb/bfPixel", "weeb/bfPixelsDEAD",
-                                    "GF_assets", "gfCar", "christmas/gfChristmas", "weeb/gfPixel",
-                                    "DADDY_DEAREST", "spooky_kids_assets", "Monster_Assets",
-                                    "Pico_FNF_assetss", "Mom_Assets", "momCar",
-                                    "christmas/mom_dad_christmas_assets", "christmas/monsterChristmas",
-                                    "weeb/senpai", "weeb/spirit", "weeb/senpaiCrazy"];
+    // //List of character graphics and some other stuff.
+    // //Just in case it want to do something with it later.
+    // var charactersCached:Bool;
+    // var startCachingCharacters:Bool = false;
+    // var charI:Int = 0;
+    // public static final characters:Array<String> =   ["BOYFRIEND", "bfCar", "christmas/bfChristmas", "weeb/bfPixel", "weeb/bfPixelsDEAD",
+    //                                 "GF_assets", "gfCar", "christmas/gfChristmas", "weeb/gfPixel",
+    //                                 "DADDY_DEAREST", "spooky_kids_assets", "Monster_Assets",
+    //                                 "Pico_FNF_assetss", "Mom_Assets", "momCar",
+    //                                 "christmas/mom_dad_christmas_assets", "christmas/monsterChristmas",
+    //                                 "weeb/senpai", "weeb/spirit", "weeb/senpaiCrazy"];
 
-    var graphicsCached:Bool;
-    var startCachingGraphics:Bool = false;
-    var gfxI:Int = 0;
-    public static final graphics:Array<String> =    ["logoBumpin", "logoBumpin2", "gfDanceTitle2", "titleEnter", "fpsPlus/title/backgroundBf", "fpsPlus/title/barBottom", "fpsPlus/title/barTop", "fpsPlus/title/gf", "fpsPlus/title/glow", 
-                                    "stageback", "stagefront", "stagecurtains",
-                                    "halloween_bg",
-                                    "philly/sky", "philly/city", "philly/behindTrain", "philly/train", "philly/street", "philly/win0", "philly/win1", "philly/win2", "philly/win3", "philly/win4",
-                                    "limo/bgLimo", "limo/fastCarLol", "limo/limoDancer", "limo/limoDrive", "limo/limoSunset",
-                                    "christmas/bgWalls", "christmas/upperBop", "christmas/bgEscalator", "christmas/christmasTree", "christmas/bottomBop", "christmas/fgSnow", "christmas/santa",
-                                    "christmas/evilBG", "christmas/evilTree", "christmas/evilSnow",
-                                    "weeb/weebSky", "weeb/weebSchool", "weeb/weebStreet", "weeb/weebTreesBack", "weeb/weebTrees", "weeb/petals", "weeb/bgFreaks",
-                                    "weeb/animatedEvilSchool"];
+    // var graphicsCached:Bool;
+    // var startCachingGraphics:Bool = false;
+    // var gfxI:Int = 0;
+    // public static final graphics:Array<String> =    ["logoBumpin", "logoBumpin2", "gfDanceTitle2", "titleEnter", "fpsPlus/title/backgroundBf", "fpsPlus/title/barBottom", "fpsPlus/title/barTop", "fpsPlus/title/gf", "fpsPlus/title/glow", 
+    //                                 "stageback", "stagefront", "stagecurtains",
+    //                                 "halloween_bg",
+    //                                 "philly/sky", "philly/city", "philly/behindTrain", "philly/train", "philly/street", "philly/win0", "philly/win1", "philly/win2", "philly/win3", "philly/win4",
+    //                                 "limo/bgLimo", "limo/fastCarLol", "limo/limoDancer", "limo/limoDrive", "limo/limoSunset",
+    //                                 "christmas/bgWalls", "christmas/upperBop", "christmas/bgEscalator", "christmas/christmasTree", "christmas/bottomBop", "christmas/fgSnow", "christmas/santa",
+    //                                 "christmas/evilBG", "christmas/evilTree", "christmas/evilSnow",
+    //                                 "weeb/weebSky", "weeb/weebSchool", "weeb/weebStreet", "weeb/weebTreesBack", "weeb/weebTrees", "weeb/petals", "weeb/bgFreaks",
+    //                                 "weeb/animatedEvilSchool"];
 
-    var cacheStart:Bool = false;
+    // var cacheStart:Bool = false;
 
-    public static var thing = false;
+    // public static var thing = false;
 
 	override function create()
 	{
@@ -92,9 +93,9 @@ class Startup extends FlxState
         */
 
         UIStateExt.defaultTransIn = ScreenWipeIn;
-        UIStateExt.defaultTransInArgs = [1.2];
+        UIStateExt.defaultTransInArgs = [0.3];
         UIStateExt.defaultTransOut = ScreenWipeOut;
-        UIStateExt.defaultTransOutArgs = [0.6];
+        UIStateExt.defaultTransOutArgs = [0.3];
 
         if (FlxG.save.data.weekUnlocked != null)
 		{
@@ -110,187 +111,192 @@ class Startup extends FlxState
 				StoryMenuState.weekUnlocked[0] = true;
 		}
 
-        if( FlxG.save.data.musicPreload2 == null ||
-            FlxG.save.data.charPreload2 == null ||
-            FlxG.save.data.graphicsPreload2 == null)
-        {
-            openPreloadSettings();
-        }
-        else{
-            songsCached = !FlxG.save.data.musicPreload2;
-            charactersCached = !FlxG.save.data.charPreload2;
-            graphicsCached = !FlxG.save.data.graphicsPreload2;
-        }
+        // if( FlxG.save.data.musicPreload2 == null ||
+        //     FlxG.save.data.charPreload2 == null ||
+        //     FlxG.save.data.graphicsPreload2 == null)
+        // {
+        //     openPreloadSettings();
+        // }
+        // else{
+        //     songsCached = !FlxG.save.data.musicPreload2;
+        //     charactersCached = !FlxG.save.data.charPreload2;
+        //     graphicsCached = !FlxG.save.data.graphicsPreload2;
+        // }
 
-        splash = new FlxSprite(0, 0);
-        splash.frames = Paths.getSparrowAtlas('fpsPlus/rozeSplash');
-        splash.animation.addByPrefix('start', 'Splash Start', 24, false);
-        splash.animation.addByPrefix('end', 'Splash End', 24, false);
-        add(splash);
-        splash.animation.play("start");
-        splash.updateHitbox();
-        splash.screenCenter();
+        // splash = new FlxSprite(0, 0);
+        // splash.frames = Paths.getSparrowAtlas('fpsPlus/rozeSplash');
+        // splash.animation.addByPrefix('start', 'Splash Start', 24, false);
+        // splash.animation.addByPrefix('end', 'Splash End', 24, false);
+        // add(splash);
+        // splash.animation.play("start");
+        // splash.updateHitbox();
+        // splash.screenCenter();
 
-        loadingText = new FlxText(5, FlxG.height - 30, 0, "", 24);
-        loadingText.setFormat(Paths.font("vcr"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-        add(loadingText);
+        // loadingText = new FlxText(5, FlxG.height - 30, 0, "", 24);
+        // loadingText.setFormat(Paths.font("vcr"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        // add(loadingText);
 
-        #if web
-        FlxG.sound.play(Paths.sound("tick"), 0);   
-        #end
+        // #if web
+        // FlxG.sound.play(Paths.sound("tick"), 0);   
+        // #end
 
-        new FlxTimer().start(1.1, function(tmr:FlxTimer)
-        {
-            FlxG.sound.play(Paths.sound("splashSound"));   
-        });
+        // new FlxTimer().start(1.1, function(tmr:FlxTimer)
+        // {
+        //     FlxG.sound.play(Paths.sound("splashSound"));   
+        // });
 
         super.create();
 
+        FlxG.switchState(nextState);
+
+        openfl.Lib.application.window.x = 0;
+        openfl.Lib.application.window.y = 25;
+
     }
 
-    override function update(elapsed) 
-    {
+    // override function update(elapsed) 
+    // {
         
-        if(splash.animation.curAnim.finished && splash.animation.curAnim.name == "start" && !cacheStart){
+    //     if(splash.animation.curAnim.finished && splash.animation.curAnim.name == "start" && !cacheStart){
             
-            #if web
-            new FlxTimer().start(1.5, function(tmr:FlxTimer)
-            {
-                songsCached = true;
-                charactersCached = true;
-                graphicsCached = true;
-            });
-            #else
-            preload(); 
-            #end
+    //         #if web
+    //         new FlxTimer().start(1.5, function(tmr:FlxTimer)
+    //         {
+    //             songsCached = true;
+    //             charactersCached = true;
+    //             graphicsCached = true;
+    //         });
+    //         #else
+    //         preload(); 
+    //         #end
             
-            cacheStart = true;
-        }
-        if(splash.animation.curAnim.finished && splash.animation.curAnim.name == "end"){
-            FlxG.switchState(nextState);  
-        }
+    //         cacheStart = true;
+    //     }
+    //     if(splash.animation.curAnim.finished && splash.animation.curAnim.name == "end"){
+    //         FlxG.switchState(nextState);  
+    //     }
 
-        if(songsCached && charactersCached && graphicsCached && splash.animation.curAnim.finished && !(splash.animation.curAnim.name == "end")){
+    //     if(songsCached && charactersCached && graphicsCached && splash.animation.curAnim.finished && !(splash.animation.curAnim.name == "end")){
             
-            System.gc();
-            splash.animation.play("end");
-            splash.updateHitbox();
-            splash.screenCenter();
+    //         System.gc();
+    //         splash.animation.play("end");
+    //         splash.updateHitbox();
+    //         splash.screenCenter();
 
-            new FlxTimer().start(0.3, function(tmr:FlxTimer)
-            {
-                loadingText.text = "Done!";
-            });
-        }
+    //         new FlxTimer().start(0.3, function(tmr:FlxTimer)
+    //         {
+    //             loadingText.text = "Done!";
+    //         });
+    //     }
 
-        if(!cacheStart && FlxG.keys.justPressed.ANY){
+    //     if(!cacheStart && FlxG.keys.justPressed.ANY){
             
            
-            openPreloadSettings();
+    //         openPreloadSettings();
 
-        }
+    //     }
 
-        if(startCachingCharacters){
-            if(charI >= characters.length){
-                loadingText.text = "Characters cached...";
-                startCachingCharacters = false;
-                charactersCached = true;
-            }
-            else{
-                ImageCache.add(Paths.file(characters[charI], "images", "png"));
-                charI++;
-            }
-        }
+    //     if(startCachingCharacters){
+    //         if(charI >= characters.length){
+    //             loadingText.text = "Characters cached...";
+    //             startCachingCharacters = false;
+    //             charactersCached = true;
+    //         }
+    //         else{
+    //             ImageCache.add(Paths.file(characters[charI], "images", "png"));
+    //             charI++;
+    //         }
+    //     }
 
-        if(startCachingGraphics){
-            if(gfxI >= graphics.length){
-                loadingText.text = "Graphics cached...";
-                startCachingGraphics = false;
-                graphicsCached = true;
-            }
-            else{
-                ImageCache.add(Paths.file(graphics[gfxI], "images", "png"));
-                gfxI++;
-            }
-        }
+    //     if(startCachingGraphics){
+    //         if(gfxI >= graphics.length){
+    //             loadingText.text = "Graphics cached...";
+    //             startCachingGraphics = false;
+    //             graphicsCached = true;
+    //         }
+    //         else{
+    //             ImageCache.add(Paths.file(graphics[gfxI], "images", "png"));
+    //             gfxI++;
+    //         }
+    //     }
         
-        super.update(elapsed);
+    //     super.update(elapsed);
 
-    }
+    // }
 
-    function preload(){
+    // function preload(){
 
-        loadingText.text = "Caching Assets...";
+    //     loadingText.text = "Caching Assets...";
         
-        if(!songsCached){ 
-            #if sys sys.thread.Thread.create(() -> { #end
-                preloadMusic();
-            #if sys }); #end
-        }
+    //     if(!songsCached){ 
+    //         #if sys sys.thread.Thread.create(() -> { #end
+    //             preloadMusic();
+    //         #if sys }); #end
+    //     }
         
 
-        /*if(!charactersCached){
-            var i = 0;
-            var charLoadLoop = new FlxAsyncLoop(characters.length, function(){
-                ImageCache.add(Paths.file(characters[i], "images", "png"));
-                i++;
-            }, 1);
-        }
+    //     /*if(!charactersCached){
+    //         var i = 0;
+    //         var charLoadLoop = new FlxAsyncLoop(characters.length, function(){
+    //             ImageCache.add(Paths.file(characters[i], "images", "png"));
+    //             i++;
+    //         }, 1);
+    //     }
 
-        for(x in characters){
+    //     for(x in characters){
             
-            //trace("Chached " + x);
-        }
-        loadingText.text = "Characters cached...";
-        charactersCached = true;*/
+    //         //trace("Chached " + x);
+    //     }
+    //     loadingText.text = "Characters cached...";
+    //     charactersCached = true;*/
 
-        if(!charactersCached){
-            startCachingCharacters = true;
-        }
+    //     if(!charactersCached){
+    //         startCachingCharacters = true;
+    //     }
 
-        if(!graphicsCached){
-            startCachingGraphics = true;
-        }
+    //     if(!graphicsCached){
+    //         startCachingGraphics = true;
+    //     }
 
-    }
+    // }
 
-    function preloadMusic(){
-        for(x in songs){
-            if(Assets.exists(Paths.inst(x))){
-                FlxG.sound.cache(Paths.inst(x));
-            }
-            else{
-                FlxG.sound.cache(Paths.music(x));
-            }
-        }
-        loadingText.text = "Songs cached...";
-        songsCached = true;
-    }
+    // function preloadMusic(){
+    //     for(x in songs){
+    //         if(Assets.exists(Paths.inst(x))){
+    //             FlxG.sound.cache(Paths.inst(x));
+    //         }
+    //         else{
+    //             FlxG.sound.cache(Paths.music(x));
+    //         }
+    //     }
+    //     loadingText.text = "Songs cached...";
+    //     songsCached = true;
+    // }
 
-    function preloadCharacters(){
-        for(x in characters){
-            ImageCache.add(Paths.file(x, "images", "png"));
-            //trace("Chached " + x);
-        }
-        loadingText.text = "Characters cached...";
-        charactersCached = true;
-    }
+    // function preloadCharacters(){
+    //     for(x in characters){
+    //         ImageCache.add(Paths.file(x, "images", "png"));
+    //         //trace("Chached " + x);
+    //     }
+    //     loadingText.text = "Characters cached...";
+    //     charactersCached = true;
+    // }
 
-    function preloadGraphics(){
-        for(x in graphics){
-            ImageCache.add(Paths.file(x, "images", "png"));
-            //trace("Chached " + x);
-        }
-        loadingText.text = "Graphics cached...";
-        graphicsCached = true;
-    }
+    // function preloadGraphics(){
+    //     for(x in graphics){
+    //         ImageCache.add(Paths.file(x, "images", "png"));
+    //         //trace("Chached " + x);
+    //     }
+    //     loadingText.text = "Graphics cached...";
+    //     graphicsCached = true;
+    // }
 
-    function openPreloadSettings(){
-        #if desktop
-        CacheSettings.noFunMode = true;
-        FlxG.switchState(new CacheSettings());
-        CacheSettings.returnLoc = new Startup();
-        #end
-    }
+    // function openPreloadSettings(){
+    //     #if desktop
+    //     CacheSettings.noFunMode = true;
+    //     FlxG.switchState(new CacheSettings());
+    //     CacheSettings.returnLoc = new Startup();
+    //     #end
+    // }
 
 }

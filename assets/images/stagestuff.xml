@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+-->
+<TextureAtlas imagePath="stagestuff.png" width="8192" height="8192">
+  <SubTexture name="stageback2" x="2" y="2"  width="7680" height="4200" frameX="-0" frameY="-0" frameWidth="7680" frameHeight="4200"/>
+  <SubTexture name="stagecurtains" x="2" y="4206"  width="7680" height="3281" frameX="-0" frameY="-0" frameWidth="7680" frameHeight="4200"/>
+</TextureAtlas>

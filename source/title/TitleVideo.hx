@@ -1,58 +1,58 @@
-package title;
+// package title;
 
-import flixel.FlxG;
-import flixel.FlxState;
-import flixel.util.FlxColor;
+// import flixel.FlxG;
+// import flixel.FlxState;
+// import flixel.util.FlxColor;
 
-using StringTools;
+// using StringTools;
 
-class TitleVideo extends FlxState
-{
-	var oldFPS:Int = VideoHandler.MAX_FPS;
-	var video:VideoHandler;
-	var titleState = new TitleScreen();
+// class TitleVideo extends FlxState
+// {
+// 	var oldFPS:Int = VideoHandler.MAX_FPS;
+// 	var video:VideoHandler;
+// 	var titleState = new TitleScreen();
 
-	override public function create():Void
-	{
+// 	override public function create():Void
+// 	{
 
-		super.create();
+// 		super.create();
 
-		//FlxG.sound.cache(Paths.music("klaskiiLoop"));
+// 		//FlxG.sound.cache(Paths.music("klaskiiLoop"));
 
-		if(!Main.novid){
+// 		if(!Main.novid){
 
-			VideoHandler.MAX_FPS = 60;
+// 			VideoHandler.MAX_FPS = 60;
 
-			video = new VideoHandler();
+// 			video = new VideoHandler();
 
-			video.playMP4(Paths.video('klaskiiTitle'), function(){
-				next();
-				#if web
-					VideoHandler.MAX_FPS = oldFPS;
-				#end
-			}, false, true);
+// 			video.playMP4(Paths.video('klaskiiTitle'), function(){
+// 				next();
+// 				#if web
+// 					VideoHandler.MAX_FPS = oldFPS;
+// 				#end
+// 			}, false, true);
 
-			add(video);
+// 			add(video);
 			
-		}
-		else{
-			next();
-		}
-	}
+// 		}
+// 		else{
+// 			next();
+// 		}
+// 	}
 
-	override public function update(elapsed:Float){
+// 	override public function update(elapsed:Float){
 
-		super.update(elapsed);
+// 		super.update(elapsed);
 
-	}
+// 	}
 
-	function next():Void{
+// 	function next():Void{
 
-		FlxG.camera.flash(FlxColor.WHITE, 60);
-		FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), 1);
-		Conductor.changeBPM(158);
-		FlxG.switchState(titleState);
+// 		FlxG.camera.flash(FlxColor.WHITE, 60);
+// 		FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), 1);
+// 		Conductor.changeBPM(158);
+// 		FlxG.switchState(titleState);
 
-	}
+// 	}
 	
-}
+// }

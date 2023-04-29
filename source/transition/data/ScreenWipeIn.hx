@@ -20,7 +20,11 @@ class ScreenWipeIn extends BasicTransition{
 
         time = _time;
 
-        blockThing = FlxGradient.createGradientFlxSprite(FlxG.width, FlxG.height*2, [0x00000000, FlxColor.BLACK, FlxColor.BLACK]);
+        blockThing = FlxGradient.createGradientFlxSprite(1, 1024, [0x00000000, FlxColor.BLACK, FlxColor.BLACK]);
+        blockThing.antialiasing = true;
+        blockThing.setGraphicSize(FlxG.width, FlxG.height*2);
+        blockThing.updateHitbox();
+        blockThing.graphic.bitmap.disposeImage();
         blockThing.y -= blockThing.height/2;
         add(blockThing);
 
@@ -29,7 +33,14 @@ class ScreenWipeIn extends BasicTransition{
     override public function play(){
         FlxTween.tween(blockThing, {y: blockThing.height}, time, {onComplete: function(tween){
             end();
+            flixel.util.FlxDestroyUtil.destroy(tween);
         }});
+    }
+
+    override public function destroy()
+    {
+        blockThing = flixel.util.FlxDestroyUtil.destroy(blockThing);
+        super.destroy();
     }
 
 }

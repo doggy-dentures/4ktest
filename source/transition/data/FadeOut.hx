@@ -20,7 +20,10 @@ class FadeOut extends BasicTransition{
 
         time = _time;
 
-        blockThing = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, _color);
+        blockThing = new FlxSprite().makeGraphic(1, 1, _color);
+        blockThing.setGraphicSize(FlxG.width, FlxG.height);
+        blockThing.updateHitbox();
+        blockThing.graphic.bitmap.disposeImage();
         blockThing.alpha = 0;
         add(blockThing);
 
@@ -29,7 +32,14 @@ class FadeOut extends BasicTransition{
     override public function play(){
         FlxTween.tween(blockThing, {alpha: 1}, time, {ease: FlxEase.quartOut, onComplete: function(tween){
             end();
+            flixel.util.FlxDestroyUtil.destroy(tween);
         }});
+    }
+
+    override public function destroy()
+    {
+        blockThing = flixel.util.FlxDestroyUtil.destroy(blockThing);
+        super.destroy();
     }
 
 }

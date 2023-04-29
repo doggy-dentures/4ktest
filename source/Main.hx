@@ -9,7 +9,7 @@ import openfl.display.Sprite;
 class Main extends Sprite
 {
 
-	public static var fpsDisplay:FPS;
+	public static var fpsDisplay:FPS_Mem;
 
 	public static var novid:Bool = false;
 	public static var flippymode:Bool = false;
@@ -23,10 +23,10 @@ class Main extends Sprite
 		flippymode = Sys.args().contains("-flippymode");
 		#end
 
-		addChild(new FlxGame(0, 0, Startup, 144, 144, true));
+		addChild(new FlxGame(3840, 2160, Startup, 144, 144, true));
 
 		#if !mobile
-		fpsDisplay = new FPS(10, 3, 0xFFFFFF);
+		fpsDisplay = new FPS_Mem(10, 3, 0xFFFFFF);
 		fpsDisplay.visible = true;
 		addChild(fpsDisplay);
 		#end
